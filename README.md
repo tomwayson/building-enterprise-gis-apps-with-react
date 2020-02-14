@@ -1,3 +1,49 @@
+# Building Enterprise GIS Apps with React
+
+This repository contains the source code and resources from the **Building Enterprise GIS Apps with React** course, which is offered as part of the [2020 Esri Developer Summit pre-summit hands-on training](https://www.esri.com/en-us/about/events/devsummit/agenda/pre-summit-hands-on-training).
+
+## Presenters
+
+- Dave Bouwman [@dbouwman](https://github.com/dbouwman)
+- Mike Juniper [@mjuniper](https://github.com/mjuniper)
+- Tom Wayson [@tomwayson](https://github.com/tomwayson)
+- Markham Shofner [@MarkhamShofner](https://github.com/MarkhamShofner)
+- Andrew Tate [@drewctate](https://github.com/drewctate)
+
+## Outline
+
+- Building an App
+  - slides (TODO: modify http://mjuniper.github.io/presentations/ds2019/ambitious-apps-building.html for Ember -> React, and probably replace routing concepts w/ testing, need for UI framework & installing dependencies)
+  - [workshop](./workshop/1-building-an-app.md)
+- Architecture
+  - slides (TODO)
+  - workshop (TODO)
+- Dependencies
+  - slides (TODO)
+  - workshop (TODO)
+- Auth
+  - workshop (TODO)
+- Maps
+  - slides (TODO)
+  - workshop (TODO)
+- Deployment
+  - slides (TODO)
+  - workshop (TODO)
+
+## Source Code
+
+If you go through the above workshops, you should have an application that looks like the code in this repository.
+
+## Prerequisites
+
+You will need the following things properly installed on your computer.
+
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/) (with NPM)
+* [yarn](https://yarnpkg.com/)
+
+## Further Reading / Useful Links
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
