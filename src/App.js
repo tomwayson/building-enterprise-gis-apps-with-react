@@ -1,10 +1,10 @@
 import React from 'react';
+import { title } from './config/app';
+import AppNav from './AppNav';
 
 function App() {
   return (
-    <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a className="navbar-brand" href="#">Enterprise ArcGIS App</a>
-    </nav>
+    <AppNav title={title} />
   );
 }
 

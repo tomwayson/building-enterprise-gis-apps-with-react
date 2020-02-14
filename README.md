@@ -13,8 +13,11 @@ This repository contains the source code and resources from the **Building Enter
 ## Outline
 
 - Building an App
-  - slides (TODO: modify http://mjuniper.github.io/presentations/ds2019/ambitious-apps-building.html for Ember -> React, and probably replace routing concepts w/ testing, need for UI framework & installing dependencies)
+  - slides (TODO: modify http://mjuniper.github.io/presentations/ds2019/ambitious-apps-building.html for Ember -> React, and probably replace routing concepts w/ testing, need for UI framework)
   - [workshop](./workshop/1-building-an-app.md)
+- UI libraries & Components
+  - slides (TODO: take `npm i` & bootstrap slides from https://tomwayson.github.io/devsummit-2019/ambitious-arcgis-apps-3-addons.html and component related info from http://mjuniper.github.io/presentations/ds2019/ambitious-apps-architecture.html#/13 and Ember -> React)
+  - [workshop](./workshop/2-ui-libraries-and-components.md)
 - Architecture
   - slides (TODO)
   - workshop (TODO)
