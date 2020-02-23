@@ -1,11 +1,13 @@
 # Building an Application
 
-## Scaffold the application
+In this workshop we'll scaffold a new application, make a few changes, get the tests to pass.
 
-### Prerequisites
+## Prerequisites
 
 - node, npm, and yarn - already installed
 - Git - already installed on mac, windows users can download https://git-scm.com/download/win
+
+## Scaffold the application
 
 ### Create React App
 - open a terminal to the root folder where you keep your projects and enter:
@@ -41,11 +43,9 @@ import React from 'react';
 
 function App() {
   return (
-    <>
-      <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a className="navbar-brand" href="#">Enterprise ArcGIS App</a>
-      </nav>
-    </>
+    <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a className="navbar-brand" href="#">Enterprise ArcGIS App</a>
+    </nav>
   );
 }
 
@@ -56,8 +56,7 @@ After saving those files your browser should show a bootstrap navigation bar ins
 
 #### Notes:
 - [npx](https://www.npmjs.com/package/npx)
-- [components and props](https://reactjs.org/docs/components-and-props.html)
-- JSX, [fragments](https://reactjs.org/docs/fragments.html)
+- [JSX](https://reactjs.org/docs/introducing-jsx.html)
 - public files, compiled css & js
 
 ## Get application title from config
@@ -86,7 +85,7 @@ The title now appears in the browser tab as well as in the navigation bar.
 
 #### Notes:
 - use config for shared values that don't change during the lifetime of the app
-- if we planned to internationalize your app, we would have used [a library like react-intl or react-i18next](https://smddzcy.com/posts/2019-05-17/internationalization-in-react)
+- if we planned to internationalize your app, we would have used [a library like react-intl or react-i18next](https://smddzcy.com/posts/2019-05-17/internationalization-in-react) instead of config for the title
 
 ## Get tests to pass
 
@@ -99,8 +98,8 @@ The title now appears in the browser tab as well as in the navigation bar.
 
 ```js
 test('renders the app title', () => {
-  const { getByText } = render(<App title="Title" />);
-  const linkElement = getByText(/Title/i);
+  const { getByText } = render(<App />);
+  const linkElement = getByText(/Enterprise ArcGIS App/i);
   expect(linkElement).toBeInTheDocument();
 });
 ```
@@ -118,3 +117,7 @@ test('renders the app title', () => {
 #### Notes:
 - [rendering tests](https://github.com/testing-library/react-testing-library)
 - tests let us refactor (delete files) w/ confidence
+
+## Next steps
+
+In [Workshop 2: UI libraries & Components](.2-ui-libraries-and-components.md) we'll install a React implementation of Bootstrap to make the navigation menu interactive.
