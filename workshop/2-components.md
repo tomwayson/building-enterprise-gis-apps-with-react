@@ -1,30 +1,15 @@
-# UI libraries & Components
+# Components
 
-In this workshop we'll install a React implementation of Bootstrap to make the navigation menu interactive. We'll also learn about installing and using dependencies, as well as the how to localize state with React components.
+In this workshop we'll install a React implementation of Bootstrap to make the navigation menu interactive. Along the way We'll learn how to localize state with React components.
 
 ## Prerequisites
 
 Complete [Workshop 1: Building an Application](./1-building-an-app.md)
 
-## Install Bootstrap
-
-- Follow [CRA instructions for adding bootstrap](https://create-react-app.dev/docs/adding-bootstrap/):
-  - `yarn add bootstrap`
-  - in `src/index.css` **remove** the line that starts w/ `@import`
-  - in `src/index.js` **insert** `import 'bootstrap/dist/css/bootstrap.min.css';` above `import './index.css';`
-- start app (`yarn start`)
-
-The app should look the same as before.
-
-#### Notes
-- webpack lets us `import` local CSS files from JS
-- node module resolution (i.e. importing from `'bootstrap'`)
-
 ## Collapse navigation menu with [reactstrap](https://reactstrap.github.io/)
 
 ### Install reactstrap
 
-- stop app (`ctrl+C`)
 - run `yarn add reactstrap`
 - start app (`yarn start`)
 

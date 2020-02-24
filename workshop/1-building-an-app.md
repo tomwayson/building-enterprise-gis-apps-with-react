@@ -1,6 +1,6 @@
 # Building an Application
 
-In this workshop we'll scaffold a new application, make a few changes, get the tests to pass.
+In this workshop we'll scaffold a new application, add the Bootstrap UI library, and get the tests to pass. Along the way we'll learn about application configuration and how to install and use dependencies.
 
 ## Prerequisites
 
@@ -23,19 +23,6 @@ yarn start
 ```
 
 - open a browser to http://localhost:3000/
-
-### Add some markup and CSS
-- open `src/index.css` and **replace** its contents with:
-
-```css
-/* bootstrap styles */
-@import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
-
-body {
-  padding-top: 3.5rem;
-}
-```
-
 - open `src/App.js` and **replace** its contents with:
 
 ```jsx
@@ -52,12 +39,32 @@ function App() {
 export default App;
 ```
 
-After saving those files your browser should show a bootstrap navigation bar instead of the React logo.
+After saving those files your browser should the title instead of the React logo. However, it looks like plain text instead of a Bootstrap navigation menu.
 
 #### Notes:
 - [npx](https://www.npmjs.com/package/npx)
 - [JSX](https://reactjs.org/docs/introducing-jsx.html)
 - public files, compiled css & js
+
+## Install Bootstrap
+
+- stop app (`ctrl+C`)
+- Follow [CRA instructions for adding bootstrap](https://create-react-app.dev/docs/adding-bootstrap/):
+  - `yarn add bootstrap`
+- open `src/index.css` and **replace** its contents with:
+```css
+body {
+  padding-top: 3.5rem;
+}
+```
+- in `src/index.js` **insert** `import 'bootstrap/dist/css/bootstrap.min.css';` above `import './index.css';`
+- start app (`yarn start`)
+
+The title now appears in a Bootstrap navigation menu.
+
+#### Notes
+- webpack lets us `import` local CSS files from JS
+- node module resolution (i.e. importing from `'bootstrap'`)
 
 ## Get application title from config
 
@@ -120,4 +127,4 @@ test('renders the app title', () => {
 
 ## Next steps
 
-In [Workshop 2: UI libraries & Components](.2-ui-libraries-and-components.md) we'll install a React implementation of Bootstrap to make the navigation menu interactive.
+In [Workshop 2: Components](.2-components.md) we'll install a React implementation of Bootstrap to make the navigation menu interactive.
