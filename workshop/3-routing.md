@@ -127,9 +127,82 @@ export default Home;
 - visit `http://localhost:3000/`
 
 #### Notes
+- public folder for static assets
 
 ### Add the search form
 
-- TODO:
+- add a `src/AgoSearch.js` file with the following contents:
+
+```jsx
+import React from 'react';
+
+function AgoSearch() {
+  function onSubmit(e) {
+    // don't actually submit the form
+    e.preventDefault();
+  }
+  return (
+    <form className="search-form" onSubmit={onSubmit}>
+      <div className="input-group input-group-lg">
+        <input
+          className="form-control"
+          placeholder="search for items"
+        />
+        <div className="input-group-append">
+          <button className="btn btn-secondary" type="submit">
+            Search
+          </button>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+export default AgoSearch;
+```
+
+- in `src/Home.js`:
+  - **insert** `import AgoSearch from './AgoSearch';` at the _bottom_ of the `import` statements
+  - **insert** `<AgoSearch />` at _before_ the closing `</div>` tag
+
+You can see the search form, but nothing happens when you submit it.
+
+### Redirect to the items route
+
+- in `src/AgoSearch.js`:
+  - **replace** `import React from 'react';` with `import React, { useState } from 'react';`
+  - **replace** `AgoSearch()` with `AgoSearch({ onSearch })`
+  - **insert** the following above the `onSubmit()` function:
+  ```jsx
+  const [q, setQ] = useState("");
+  function onChange(e) {
+    // hold onto a copy of the search term
+    setQ(e.target.value);
+  }
+  ```
+  - **insert** the following _inside_ `onSubmit()` _below_ `e.preventDefault();`:
+  ```jsx
+    // call search function that was passed in as a prop
+    onSearch && onSearch(q);
+  ```
+  - **insert** the following _inside_ the `<input>` tag _below_ the `placeholder` attribute:
+  ```jsx
+          value={q}
+          onChange={onChange}
+  ```
+
+- in `src/Home.js`:
+  - **insert** `import { useHistory } from 'react-router-dom';` at the _bottom_ of the `import` statements
+  - **insert** the following _above_ the `return()` statement:
+  ```jsx
+  const history = useHistory();
+  function onSearch (q) {
+    history.push(`/items?q=${q}`);
+  }
+  ```
+  - **replace** `<AgoSearch />` with `<AgoSearch onSearch={onSearch} />`
+  - visit `http://localhost:3000/`, enter a search term, and click the `Search` button.
+
+Submitting the search form now redirects to the items route with the search term in the query string like `?q=test`.
 
 ## Next steps
