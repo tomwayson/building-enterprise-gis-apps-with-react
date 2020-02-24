@@ -201,8 +201,58 @@ You can see the search form, but nothing happens when you submit it.
   }
   ```
   - **replace** `<AgoSearch />` with `<AgoSearch onSearch={onSearch} />`
-  - visit `http://localhost:3000/`, enter a search term, and click the `Search` button.
+- visit http://localhost:3000/, enter a search term, and click the `Search` button.
 
 Submitting the search form now redirects to the items route with the search term in the query string like `?q=test`.
 
+### Read the search term from the URL
+
+- in `src/Items.js`:
+  - **insert** `import { useLocation } from 'react-router-dom';` at the _bottom_ of the `import` statements
+  - **replace** the _content_ `Items()` function with:
+  ```jsx
+  const { search } = useLocation();
+  return <p>{search}</p>;
+  ```
+- visit http://localhost:3000/, enter a search term, and click the `Search` button.
+
+You now see the search string printed on the page.
+
+#### Notes:
+- the [`useState()` hook](https://reactjs.org/docs/hooks-state.html) lets us manage local state within an function component
+- pass state from child components to their parents using a callback (i.e. `onSearch`)
+- React Router's hooks (`useHistory()` and `useLocation()`) let us [access and set the global state of the router](https://reacttraining.com/blog/react-router-v5-1/)
+
+## Add tests
+
+### Test the search component
+
+- stop app (`ctrl+C`)
+- create a new `AgoSearch.test.js` file with the following content:
+```jsx
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import AgoSearch from './AgoSearch';
+
+test('it should pass input value on submit', () => {
+  function onSearch (q) {
+    expect(q).toBe('test');
+  }
+  const { getByPlaceholderText, getByText } = render(<AgoSearch onSearch={onSearch} />);
+  // simulate user typing in 'test' and clicking search
+  const input = getByPlaceholderText(/search for items/i);
+  fireEvent.change(input, { target: { value: 'test' }});
+  const button = getByText('Search');
+  fireEvent.click(button);
+});
+```
+- run the tests w/ `yarn test`
+- verify that they pass
+- stop tests (`ctrl+C`)
+
+#### Notes:
+- use [`fireEvent`](https://testing-library.com/docs/dom-testing-library/api-events) to emulate user interactions
+
 ## Next steps
+
+In [Workshop 4: Data](./4-data.md) we'll install the [@esri/arcgis-rest-portal](https://esri.github.io/arcgis-rest-js/api/portal/) library to actually perform our item search and display the data.
