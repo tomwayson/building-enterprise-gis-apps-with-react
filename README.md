@@ -19,8 +19,8 @@ This repository contains the source code and resources from the **Building Enter
   - slides (TODO: take bootstrap slides from https://tomwayson.github.io/devsummit-2019/ambitious-arcgis-apps-3-addons.html and component related info from http://mjuniper.github.io/presentations/ds2019/ambitious-apps-architecture.html#/13 and Ember -> React)
   - [workshop](./workshop/2-components.md)
 - Routing
-  - slides (TODO)
-  - workshop (TODO)
+  - slides (TODO: get routing concepts from http://mjuniper.github.io/presentations/ds2019/ambitious-apps-building.html for Ember -> React, and talk about React equivalents to services from http://mjuniper.github.io/presentations/ds2019/ambitious-apps-architecture.html)
+  - [workshop](./workshop/3-routing.md)
 - Dependencies
   - slides (TODO)
   - workshop (TODO)

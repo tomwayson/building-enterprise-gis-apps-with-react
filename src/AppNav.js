@@ -7,6 +7,7 @@ import {
   Nav,
   NavItem
 } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 class AppNav extends React.Component {
   constructor(props) {
@@ -29,14 +30,14 @@ class AppNav extends React.Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav navbar>
             <NavItem>
-              <span className="nav-link">
+              <NavLink className="nav-link" exact to="/">
                 Home
-              </span>
+              </NavLink>
             </NavItem>
             <NavItem>
-              <span className="nav-link">
+              <NavLink className="nav-link" to="/items">
                 Items
-              </span>
+              </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
