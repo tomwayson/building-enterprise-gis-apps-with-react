@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@esri/arcgis-rest-auth": "^2.0.0",
+    "@esri/arcgis-rest-portal": "^2.8.2",
+    "@esri/arcgis-rest-request": "^2.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
