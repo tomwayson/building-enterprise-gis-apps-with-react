@@ -107,7 +107,50 @@ Now the results are nicely formated in a table with Bootstrap styles.
 
 ## Add the inline search form
 
-TODO
+First we'll need to add an `onSearch()` callback that updates the router's location.
+
+- in `src/Items.js`:
+  - **insert** `, useHistory` after `useLocation`
+  - **insert** `import AgoSearch from './AgoSearch';` at the _bottom_ of the `import` statements
+  - **insert** the following above the `Items()` function
+  ```jsx
+  function buildPath(params) {
+    let searchParams = new URLSearchParams(params);
+    return `/items?${searchParams.toString()}`;
+  }
+  ```
+  - **insert** the following _above_ the `useEffect()` function:
+  ```jsx
+  const history = useHistory();
+
+  function onSearch (newQ) {
+    const path = buildPath({
+      q: newQ,
+      num
+    });
+    history.push(path);
+  }
+  ```
+  - **replace** `{/* TODO: inline search form goes here */}` with `<AgoSearch onSearch={onSearch} />`
+  - visit http://localhost:3000/items?q=test and start entering search terms
+
+Submitting the form updates the results, but the form is too big for the space we've allocated. Also, the initial search term ('test') was not shown in the form. Let's add props to the form to make it more reusable.
+
+- in `src/AgoSearch.js`:
+  - **replace ** `AgoSearch({ onSearch })` with `AgoSearch({ onSearch, q: initialQ = '', inline })`
+  - **replace** `const [q, setQ] = useState("")` with:
+  ```jsx
+  const [q, setQ] = useState(initialQ);
+  const inputGroupClass = `input-group input-group-${inline ? 'sm' : 'lg'}`;
+  ```
+  - **replace** `<div className="input-group input-group-lg">` with `<div className={inputGroupClass}>`
+
+- in `src/Items.js`:
+  - **replace** `<AgoSearch onSearch={onSearch} />` with `<AgoSearch onSearch={onSearch} q={q} inline />`
+
+  - visit http://localhost:3000/items?q=test and start entering search terms
+
+The search form is smaller and the initial search term ('test') was shown. However, we're only showing the first page of results. Let's add links that let users page through the results.
 
 ## Add a paging control
 

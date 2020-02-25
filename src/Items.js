@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { searchItems } from '@esri/arcgis-rest-portal';
 import ItemsTable from './ItemsTable';
+import AgoSearch from './AgoSearch';
 
 // parse query string for search params or provide default values
 function parseSearch (search) {
@@ -17,11 +18,25 @@ const defaultResponse = {
   total: 0
 };
 
+function buildPath(params) {
+  let searchParams = new URLSearchParams(params);
+  return `/items?${searchParams.toString()}`;
+}
+
 function Items() {
   const { search } = useLocation();
   const { q, start, num } = parseSearch(search);
   const [response, setResponse] = useState(defaultResponse);
   const { results, total } = response;
+  const history = useHistory();
+
+  function onSearch (newQ) {
+    const path = buildPath({
+      q: newQ,
+      num
+    });
+    history.push(path);
+  }
 
   useEffect(() => {
     if (!q) {
@@ -42,7 +57,7 @@ function Items() {
         </h2>
       </div>
       <div className="col-3">
-        {/* TODO: inline search form goes here */}
+        <AgoSearch onSearch={onSearch} q={q} inline />
       </div>
     </div>
     <div className="row">

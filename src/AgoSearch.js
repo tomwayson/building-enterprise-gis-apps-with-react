@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-function AgoSearch({ onSearch }) {
-  const [q, setQ] = useState("");
+function AgoSearch({ onSearch, q: initialQ = '', inline }) {
+  const [q, setQ] = useState(initialQ);
+  const inputGroupClass = `input-group input-group-${inline ? 'sm' : 'lg'}`;
+
   function onChange(e) {
     // hold onto a copy of the search term
     setQ(e.target.value);
@@ -14,7 +16,7 @@ function AgoSearch({ onSearch }) {
   }
   return (
     <form className="search-form" onSubmit={onSubmit}>
-      <div className="input-group input-group-lg">
+      <div className={inputGroupClass}>
         <input
           className="form-control"
           placeholder="search for items"
