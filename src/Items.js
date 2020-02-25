@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { searchItems } from '@esri/arcgis-rest-portal';
+import ItemsTable from './ItemsTable';
 
 // parse query string for search params or provide default values
 function parseSearch (search) {
@@ -46,7 +47,7 @@ function Items() {
     </div>
     <div className="row">
       <div className="col-12">
-        {results && JSON.stringify(results)}
+        <ItemsTable items={results} />
       </div>
     </div>
   </>;

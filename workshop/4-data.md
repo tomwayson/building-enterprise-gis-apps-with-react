@@ -67,13 +67,49 @@ Now when we change query parameters and reload the page we'll see the response d
 
 ## Format the response data
 
+- create a new `ItemsTable.js` file with the following content:
+```jsx
+import React from 'react';
+
+function ItemsTable({ items }) {
+  return (
+    <table className="table table-striped table-bordered table-hover">
+      <thead className="thead-dark">
+        <tr>
+          <th>Title</th>
+          <th>Type</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        {items &&
+          items.map(item => {
+            return (
+              <tr key={item.id}>
+                <td>{item.title}</td>
+                <td>{item.type}</td>
+                <td>{item.owner}</td>
+              </tr>
+            );
+          })}
+      </tbody>
+    </table>
+  );
+}
+
+export default ItemsTable;
+```
+- in `src/Items.js`:
+  - **insert** `import ItemsTable from './ItemsTable';` at the _bottom_ of the `import` statements
+  - **replace** `{results && JSON.stringify(results)}` with `<ItemsTable items={results} />`
+
+Now the results are nicely formated in a table with Bootstrap styles.
+
+## Add the inline search form
+
 TODO
 
 ## Add a paging control
-
-TODO
-
-## Add the search form
 
 TODO
 
