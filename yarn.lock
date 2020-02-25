@@ -8326,6 +8326,11 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-arcgis-hub@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-arcgis-hub/-/react-arcgis-hub-0.1.0.tgz#9ce82b6ac6cbc735832a90af67e77e132dae3ddc"
+  integrity sha512-HElgIqLtnCyQP+rBAJ04AsvaXsQ4BLr++kx+T610m5O3fFjeNovUw++UPt5TeIys1RPbDZQKIWeEjcxnKGjonA==
+
 react-dev-utils@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.1.0.tgz#ccf82135f6dc2fc91969bc729ce57a69d8e86025"

@@ -154,11 +154,54 @@ The search form is smaller and the initial search term ('test') was shown. Howev
 
 ## Add a paging control
 
-TODO
+### Install a library with a paging component
 
-## Tests???
+[react-arcgis-hub](https://www.npmjs.com/package/react-arcgis-hub) has a paging component we can use.
 
-TODO
+- stop app (`ctrl+C`)
+- run 'yarn add react-arcgis-hub`
+
+### 
+- start app (`yarn start`)
+- in `/src/Items.js`
+  - **insert** `import { ItemPager } from 'react-arcgis-hub';` at the _bottom_ of the `import` statements
+  - **insert** the following _above_ the `onSearch()` function:
+  ```jsx
+  const pageNumber = (start - 1) / num + 1;
+
+  function changePage (page) {
+    const newStart = ((page - 1) * num) + 1;
+    const path = buildPath({
+      q,
+      num,
+      start: newStart
+    });
+    history.push(path);
+  }
+  ```
+  - **insert** the following _below_ the `<ItemsTable>` component:
+  ```jsx
+  <ItemPager 
+    pageSize={num}
+    totalCount={total}
+    pageNumber={pageNumber}
+    changePage={changePage}
+  />
+  ```
+- visit the items route and initiate a search
+- use the links at the bottom to page through the results.
+
+#### Notes:
+- `react-arcgis-hub` _just works_ because it shares the same [dependencies](https://www.npmjs.com/package/react-arcgis-hub#dependencies) as our application
+
+## Run Tests
+
+We modified the `<AgoSearch />` component, let's make sure its test still passes.
+
+- stop app (`ctrl+C`)
+- run the tests w/ `yarn test`
+- you may need to type `a` to re-run the tests (read output in the terminal)
+- stop tests (`ctrl+C`)
 
 ## Next steps
 

@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { searchItems } from '@esri/arcgis-rest-portal';
 import ItemsTable from './ItemsTable';
 import AgoSearch from './AgoSearch';
+import { ItemPager } from 'react-arcgis-hub';
 
 // parse query string for search params or provide default values
 function parseSearch (search) {
@@ -29,6 +30,17 @@ function Items() {
   const [response, setResponse] = useState(defaultResponse);
   const { results, total } = response;
   const history = useHistory();
+  const pageNumber = (start - 1) / num + 1;
+
+  function changePage (page) {
+    const newStart = ((page - 1) * num) + 1;
+    const path = buildPath({
+      q,
+      num,
+      start: newStart
+    });
+    history.push(path);
+  }
 
   function onSearch (newQ) {
     const path = buildPath({
@@ -63,6 +75,12 @@ function Items() {
     <div className="row">
       <div className="col-12">
         <ItemsTable items={results} />
+        <ItemPager 
+          pageSize={num}
+          totalCount={total}
+          pageNumber={pageNumber}
+          changePage={changePage}
+        />
       </div>
     </div>
   </>;
