@@ -216,7 +216,30 @@ Submitting the search form now redirects to the items route with the search term
   ```
 - visit http://localhost:3000/, enter a search term, and click the `Search` button.
 
-You now see the search string printed on the page.
+You now see the search string printed on the page. Let's parse the search parameters in the format we'll need in order to query items.
+
+- in `src/Items.js`:
+  - **insert** the following _below_ the `import` statements:
+  ```jsx
+  // parse query string for search params or provide default values
+  function parseSearch (search) {
+    const params = new URLSearchParams(search);
+    const q = params.get('q') || '';
+    const start = parseInt(params.get('start')) || 1;
+    const num = parseInt(params.get('num')) || 10;
+    return { q, start, num };
+  }
+  ```
+  - **replace** the _content_ of the `Items()` function with:
+  ```jsx
+  const { search } = useLocation();
+  const { q, start, num } = parseSearch(search);
+  return <p>{JSON.stringify({ q, start, num })}</p>;
+  ```
+- visit http://localhost:3000/items?q=test
+- now try adding `start`, `num`, and/or arbitrary params to the URL, like http://localhost:3000/items?q=test&start=11&num=20&skip=me
+
+The route now parses the relevant params from the URL, or uses default values, and ignores any other params.
 
 #### Notes:
 - the [`useState()` hook](https://reactjs.org/docs/hooks-state.html) lets us manage local state within an function component
