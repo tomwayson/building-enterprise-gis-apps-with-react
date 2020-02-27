@@ -161,7 +161,7 @@ The search form is smaller and the initial search term ('test') was shown. Howev
 - stop app (`ctrl+C`)
 - run 'yarn add react-arcgis-hub`
 
-###
+### Add the paging component below the table
 - start app (`yarn start`)
 - in `/src/Items.js`
   - **insert** `import { ItemPager } from 'react-arcgis-hub';` at the _bottom_ of the `import` statements
