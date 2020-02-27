@@ -119,7 +119,7 @@ First we'll need to add an `onSearch()` callback that updates the router's locat
     return `/items?${searchParams.toString()}`;
   }
   ```
-  - **insert** the following _above_ the `useEffect()` function:
+  - **insert** the following _above_ the `useEffect()` function [within the `Items()` function]:
   ```jsx
   const history = useHistory();
 
@@ -137,7 +137,7 @@ First we'll need to add an `onSearch()` callback that updates the router's locat
 Submitting the form updates the results, but the form is too big for the space we've allocated. Also, the initial search term ('test') was not shown in the form. Let's add props to the form to make it more reusable.
 
 - in `src/AgoSearch.js`:
-  - **replace ** `AgoSearch({ onSearch })` with `AgoSearch({ onSearch, q: initialQ = '', inline })`
+  - **replace ** `function AgoSearch({ onSearch }) {` with `function AgoSearch({ onSearch, q: initialQ = '', inline }) {`
   - **replace** `const [q, setQ] = useState("")` with:
   ```jsx
   const [q, setQ] = useState(initialQ);
@@ -161,11 +161,11 @@ The search form is smaller and the initial search term ('test') was shown. Howev
 - stop app (`ctrl+C`)
 - run 'yarn add react-arcgis-hub`
 
-### 
+###
 - start app (`yarn start`)
 - in `/src/Items.js`
   - **insert** `import { ItemPager } from 'react-arcgis-hub';` at the _bottom_ of the `import` statements
-  - **insert** the following _above_ the `onSearch()` function:
+  - **insert** the following _above_ the `onSearch()` function [within the `Items()` function]:
   ```jsx
   const pageNumber = (start - 1) / num + 1;
 
@@ -181,7 +181,7 @@ The search form is smaller and the initial search term ('test') was shown. Howev
   ```
   - **insert** the following _below_ the `<ItemsTable>` component:
   ```jsx
-  <ItemPager 
+  <ItemPager
     pageSize={num}
     totalCount={total}
     pageNumber={pageNumber}

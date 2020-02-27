@@ -127,4 +127,4 @@ test('renders the app title', () => {
 
 ## Next steps
 
-In [Workshop 2: Components](.2-components.md) we'll install a React implementation of Bootstrap to make the navigation menu interactive.
+In [Workshop 2: Components](2-components.md) we'll install a React implementation of Bootstrap to make the navigation menu interactive.

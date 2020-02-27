@@ -41,7 +41,7 @@ export default Items;
   import Home from './Home';
   import Items from './Items';
   ```
-  - **replace** the contents _inside_ the `return()` statement with: 
+  - **replace** the contents _inside_ the `return()` statement with:
   ```jsx
     <>
       <AppNav title={title} />
@@ -171,7 +171,7 @@ You can see the search form, but nothing happens when you submit it.
 
 - in `src/AgoSearch.js`:
   - **replace** `import React from 'react';` with `import React, { useState } from 'react';`
-  - **replace** `AgoSearch()` with `AgoSearch({ onSearch })`
+  - **replace** `function AgoSearch() {` with `function AgoSearch({ onSearch }) {`
   - **insert** the following above the `onSubmit()` function:
   ```jsx
   const [q, setQ] = useState("");
