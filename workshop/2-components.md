@@ -111,11 +111,10 @@ Clicking on the "hamburger" button now opens/closes the collapsed panel.
 ```js
 import React from 'react';
 import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import AppNav from './AppNav';
 
 test('it renders the title', () => {
-  const { getByText } = render(<MemoryRouter><AppNav title="Title" /></MemoryRouter>);
+  const { getByText } = render(<AppNav title="Title" />);
   const linkElement = getByText(/Title/i);
   expect(linkElement).toBeInTheDocument();
 });
@@ -125,9 +124,6 @@ test('it renders the title', () => {
 - run the tests w/ `npm test`
 - verify that tests still pass
 - stop tests (`ctrl+C`)
-
-#### Notes:
-- we have to wrap `<AppNav>` in a [`<MemoryRouter>`](https://reacttraining.com/react-router/web/api/MemoryRouter) because it uses `<NavLink>`s
 
 ## Next steps
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import AppNav from './AppNav';
+import { MemoryRouter } from 'react-router-dom';
 
 test('it renders the title', () => {
   const { getByText } = render(<MemoryRouter><AppNav title="Title" /></MemoryRouter>);

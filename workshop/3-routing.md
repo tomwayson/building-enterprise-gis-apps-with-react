@@ -250,6 +250,8 @@ The route now parses the relevant params from the URL, or uses default values, a
 
 ### Test the search component
 
+The testing library includes [`fireEvent`](https://testing-library.com/docs/dom-testing-library/api-events) to simulate user interactions. We can use this to "fill in" the search term and "click" the button to test submitting the form.
+
 - stop app (`ctrl+C`)
 - create a new `AgoSearch.test.js` file with the following content:
 ```jsx
@@ -270,11 +272,14 @@ test('it should pass input value on submit', () => {
 });
 ```
 - run the tests w/ `npm test`
-- verify that they pass
-- stop tests (`ctrl+C`)
 
-#### Notes:
-- use [`fireEvent`](https://testing-library.com/docs/dom-testing-library/api-events) to emulate user interactions
+The new test should pass, but the `AppNav` test throws an error message saying that you should not use `<NavLink>` components outside of a router. React Router includes a [`<MemoryRouter>`](https://reacttraining.com/react-router/web/api/MemoryRouter) that we can use for testing.
+
+- in `AppNav.test.js`:
+  - **insert** `import { MemoryRouter } from 'react-router-dom';` at the _bottom_ of the `import` statements
+  - **replace** `<AppNav title="Title" />` with `<MemoryRouter><AppNav title="Title" /></MemoryRouter>`
+- the tests should re-run and pass once you save the files
+- stop tests (`ctrl+C`)
 
 ## Next steps
 
