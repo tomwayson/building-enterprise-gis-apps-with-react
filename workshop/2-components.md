@@ -10,8 +10,8 @@ Complete [Workshop 1: Building an Application](./1-building-an-app.md)
 
 ### Install reactstrap
 
-- run `yarn add reactstrap`
-- start app (`yarn start`)
+- run `npm install --save reactstrap`
+- start app (`npm start`)
 
 ### Create navigation menu
 
@@ -122,7 +122,7 @@ test('it renders the title', () => {
 ```
 
 - stop app (`ctrl+C`)
-- run the tests w/ `yarn test`
+- run the tests w/ `npm test`
 - verify that tests still pass
 - stop tests (`ctrl+C`)
 

@@ -8,8 +8,8 @@ Complete [Workshop 3: Routing](./3-routing.md)
 
 ### Install @esri/arcgis-rest-portal and dependencies
 
-- `yarn add @esri/arcgis-rest-portal @esri/arcgis-rest-auth@^2.0.0  @esri/arcgis-rest-request@^2.0.0`
-- start app (`yarn start`)
+- `npm install --save @esri/arcgis-rest-portal @esri/arcgis-rest-auth@^2.0.0  @esri/arcgis-rest-request@^2.0.0`
+- start app (`npm start`)
 
 ### Search for items
 - visit http://localhost:3000/items?q=test
@@ -159,10 +159,10 @@ The search form is smaller and the initial search term ('test') was shown. Howev
 [react-arcgis-hub](https://www.npmjs.com/package/react-arcgis-hub) has a paging component we can use.
 
 - stop app (`ctrl+C`)
-- run 'yarn add react-arcgis-hub`
+- run 'npm install --save react-arcgis-hub`
 
 ### Add the paging component below the table
-- start app (`yarn start`)
+- start app (`npm start`)
 - in `/src/Items.js`
   - **insert** `import { ItemPager } from 'react-arcgis-hub';` at the _bottom_ of the `import` statements
   - **insert** the following _above_ the `onSearch()` function (within the `Items()` function):
@@ -199,7 +199,7 @@ The search form is smaller and the initial search term ('test') was shown. Howev
 We modified the `<AgoSearch />` component, let's make sure its test still passes.
 
 - stop app (`ctrl+C`)
-- run the tests w/ `yarn test`
+- run the tests w/ `npm test`
 - you may need to type `a` to re-run the tests (read output in the terminal)
 - stop tests (`ctrl+C`)
 

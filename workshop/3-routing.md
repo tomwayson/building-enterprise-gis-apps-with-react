@@ -8,7 +8,7 @@ Complete [Workshop 2: Components](.2-components.md)
 
 ### Install React Router
 - Follow [CRA instructions for adding a router](https://create-react-app.dev/docs/adding-a-router/):
-  - `yarn add react-router-dom`
+  - `npm install --save react-router-dom`
 - in `src/index.js`:
   - **insert** `import { BrowserRouter as Router } from 'react-router-dom';` _above_ `import App from './App';`
   - **replace** `<App />` with `<Router><App /></Router>`
@@ -57,7 +57,7 @@ export default Items;
       </div>
     </>
   ```
-- start app (`yarn start`)
+- start app (`npm start`)
 - visit `http://localhost:3000/`
 - now visit `http://localhost:3000/items`
 
@@ -269,7 +269,7 @@ test('it should pass input value on submit', () => {
   fireEvent.click(button);
 });
 ```
-- run the tests w/ `yarn test`
+- run the tests w/ `npm test`
 - verify that they pass
 - stop tests (`ctrl+C`)
 

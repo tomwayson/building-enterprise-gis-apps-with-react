@@ -4,22 +4,25 @@ In this workshop we'll scaffold a new application, add the Bootstrap UI library,
 
 ## Prerequisites
 
-- node, npm, and yarn - already installed
-- Git - already installed on mac, windows users can download https://git-scm.com/download/win
+- [Git](https://git-scm.com/) - already installed on mac, windows users can download https://git-scm.com/download/win
+* [Node >= 8.10](https://nodejs.org/) with NPM v5.2+
 
 ## Scaffold the application
 
 ### Create React App
+
+**NOTE:** The command below will configure the application to use NPM as the package manager, and all the workshops use `npm` commands. If you have [yarn](https://yarnpkg.com/) installed and would prefer to use that for the remainder of the workshops, omit the `--use-npm` flag. It will be up to you to know and use the corresponding `yarn` commands (i.e. `yarn add` instead of `npm install --save`) when running the workshops.
+
 - open a terminal to the root folder where you keep your projects and enter:
 ```shell
-npx create-react-app enterprise-arcgis-app
+npx create-react-app enterprise-arcgis-app --use-npm
 cd enterprise-arcgis-app
 ```
 
 ### Run the app
 - in your terminal, enter
 ```shell
-yarn start
+npm start
 ```
 
 - open a browser to http://localhost:3000/
@@ -50,7 +53,7 @@ After saving those files your browser should the title instead of the React logo
 
 - stop app (`ctrl+C`)
 - Follow [CRA instructions for adding bootstrap](https://create-react-app.dev/docs/adding-bootstrap/):
-  - `yarn add bootstrap`
+  - `npm install --save bootstrap`
 - open `src/index.css` and **replace** its contents with:
 ```css
 body {
@@ -58,7 +61,7 @@ body {
 }
 ```
 - in `src/index.js` **insert** `import 'bootstrap/dist/css/bootstrap.min.css';` above `import './index.css';`
-- start app (`yarn start`)
+- start app (`npm start`)
 
 The title now appears in a Bootstrap navigation menu.
 
@@ -99,7 +102,7 @@ The title now appears in the browser tab as well as in the navigation bar.
 ### Fix broken test
 
 - stop app (`ctrl+C`)
-- run the tests w/ `yarn test`
+- run the tests w/ `npm test`
 - observe the line that's causing the test to fail
 - open `src/App.test.js` and **replace** the `test() {}` block w/:
 
