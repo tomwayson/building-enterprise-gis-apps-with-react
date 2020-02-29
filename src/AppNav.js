@@ -22,7 +22,7 @@ class AppNav extends React.Component {
     });
   };
   render() {
-    const { title } = this.props;
+    const { title, userMenu } = this.props;
     return (
       <Navbar color="dark" dark expand="md" fixed="top">
         <NavbarBrand href="#">{title}</NavbarBrand>
@@ -39,6 +39,9 @@ class AppNav extends React.Component {
                 Items
               </NavLink>
             </NavItem>
+          </Nav>
+          <Nav navbar className="ml-auto">
+            {userMenu}
           </Nav>
         </Collapse>
       </Navbar>

@@ -5,8 +5,11 @@ import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { restoreSession } from './util/session';
 
-ReactDOM.render(<Router><App /></Router>, document.getElementById('root'));
+const prevSession = restoreSession();
+
+ReactDOM.render(<Router><App prevSession={prevSession} /></Router>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

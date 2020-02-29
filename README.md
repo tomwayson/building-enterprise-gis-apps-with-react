@@ -24,11 +24,12 @@ This repository contains the source code and resources from the **Building Enter
 - Data
   - slides (TODO: cobble together something from the above presos about arcgis-rest-js, also cover fetching data in components with the `useEffect()` hook)
   - [workshop](./workshop/4-data.md)
-- Auth
-  - workshop (TODO)
+- Authentication
+  - slides (TODO: @dbouwman)
+  - [workshop](./workshop/5-auth.md)
 - Maps
-  - slides (TODO)
-  - workshop (TODO)
+  - slides (TODO: modify https://tomwayson.github.io/devsummit-2019/ambitious-arcgis-apps-5-maps.html#/ for Ember -> React)
+  - [workshop](./workshop/6-maps.md)
 - Deployment
   - slides (TODO)
   - workshop (TODO)
