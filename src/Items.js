@@ -24,7 +24,7 @@ function buildPath(params) {
   return `/items?${searchParams.toString()}`;
 }
 
-function Items() {
+function Items({ session }) {
   const { search } = useLocation();
   const { q, start, num } = parseSearch(search);
   const [response, setResponse] = useState(defaultResponse);
@@ -56,10 +56,10 @@ function Items() {
       setResponse(defaultResponse);
     } else {
       // execute search and update state
-      searchItems({ q, start, num })
+      searchItems({ q, start, num, authentication: session })
       .then(setResponse);
     }
-  }, [q, num, start]);
+  }, [q, num, start, session]);
 
   return <>
     <div className="row mb-2">
