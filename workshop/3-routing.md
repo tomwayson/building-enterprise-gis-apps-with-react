@@ -248,38 +248,47 @@ The route now parses the relevant params from the URL, or uses default values, a
 
 ## Add tests
 
-### Test the search component
-
-The testing library includes [`fireEvent`](https://testing-library.com/docs/dom-testing-library/api-events) to simulate user interactions. We can use this to "fill in" the search term and "click" the button to test submitting the form.
+### Fix AppNav test
 
 - stop app (`ctrl+C`)
-- create a new `AgoSearch.test.js` file with the following content:
-```jsx
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import AgoSearch from './AgoSearch';
-
-test('it should pass input value on submit', () => {
-  function onSearch (q) {
-    expect(q).toBe('test');
-  }
-  const { getByPlaceholderText, getByText } = render(<AgoSearch onSearch={onSearch} />);
-  // simulate user typing in 'test' and clicking search
-  const input = getByPlaceholderText(/search for items/i);
-  fireEvent.change(input, { target: { value: 'test' }});
-  const button = getByText('Search');
-  fireEvent.click(button);
-});
-```
 - run the tests w/ `npm test`
 
-The new test should pass, but the `AppNav` test throws an error message saying that you should not use `<NavLink>` components outside of a router. React Router includes a [`<MemoryRouter>`](https://reacttraining.com/react-router/web/api/MemoryRouter) that we can use for testing.
+The `AppNav` test throws an error message saying that you should not use `<NavLink>` components outside of a router. React Router includes a [`<MemoryRouter>`](https://reacttraining.com/react-router/web/api/MemoryRouter) that we can use for testing.
 
 - in `AppNav.test.js`:
   - **insert** `import { MemoryRouter } from 'react-router-dom';` at the _bottom_ of the `import` statements
   - **replace** `<AppNav title="Title" />` with `<MemoryRouter><AppNav title="Title" /></MemoryRouter>`
 - the tests should re-run and pass once you save the files
+
+### Testing search
+
+We could add another component test for `<AgoSearch>`, but that would not test all the code that we added to the `<Home>` and `<Items>` routes. A good way to test logic at the route level is to add a "smoke" test, or a test that renders the entire application and mimics user interactions and verifies what is rendered in response.
+
+The testing library includes [`fireEvent`](https://testing-library.com/docs/dom-testing-library/api-events) to simulate user interactions. We can use this to "fill in" the search term and "click" the button to test submitting the form.
+
+- create a new `App.test.js` file with the following content:
+```jsx
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import App from './App';
+
+test('it should pass search term to items route', async () => {
+  const { getByPlaceholderText, getByText, findByText } = render(<MemoryRouter><App /></MemoryRouter>);
+  // simulate user typing in 'test' and clicking search
+  const input = getByPlaceholderText(/search for items/i);
+  fireEvent.change(input, { target: { value: 'test' }});
+  const button = getByText('Search');
+  fireEvent.click(button);
+  // wait for items route to load and show the search terms
+  const result = await findByText(/{"q":"test","start":1,"num":10}/);
+  expect(result).toBeTruthy();
+});
+```
+- the tests should re-run and pass once you save the files
 - stop tests (`ctrl+C`)
+
+A few smoke tests like this are good for testing the entire app in happy path scenarios. You can also add tests for the individual components to test edge cases.
 
 ## Next steps
 

@@ -194,14 +194,112 @@ The search form is smaller and the initial search term ('test') was shown. Howev
 #### Notes:
 - `react-arcgis-hub` _just works_ because it shares the same [dependencies](https://www.npmjs.com/package/react-arcgis-hub#dependencies) as our application
 
-## Run Tests
+## Tests
 
-We modified the `<AgoSearch />` component, let's make sure its test still passes.
+## Fix the smoke test
+
+We modified what the items route renders, so our test will fail until we modify what it expects.
 
 - stop app (`ctrl+C`)
 - run the tests w/ `npm test`
-- you may need to type `a` to re-run the tests (read output in the terminal)
+- you may need to type `a` to re-run all tests (read output in the terminal)
+- the `App` test fails
+- in `src/App.test.js`:
+  - **replace** `const result = await findByText(/{"q":"test","start":1,"num":10}/);` with `const result = await findByText(/Your search for "test" yielded 10000 items/);`
+
+The test now passes, but because the items route now fetches the data, this test can be slow and unreliable. In order to fix this, we can mock the server response.
+
+- in `src/App.test.js`:
+  - **insert** the following _below_ the other `import` statements:
+  ```js
+  import { searchItems } from '@esri/arcgis-rest-portal';
+
+  jest.mock('@esri/arcgis-rest-portal');
+
+  const searchResponse = {
+    "query":"test",
+    "total":10000,
+    "start":1,
+    "num":10,
+    "nextStart":11,
+    "results": [{
+      "id": "27467c140c9b4aea90b9b327a22f1675",
+      "owner": "EsriMedia",
+      "created": 1389830710000,
+      "modified": 1389917598000,
+      "type": "Web Map",
+      "title": "Beer Spending"
+    }, {
+      "id": "927b9b1acbed4e9592c79a2d876c6c5c",
+      "owner": "EsriMedia",
+      "created": 1391208130000,
+      "modified": 1391226848000,
+      "type": "Map Service",
+      "title": "Super_Bowl_Beer"
+    }, {
+      "id": "07a5810edbb847858e82b7c0fd1623a7",
+      "owner": "3918",
+      "created": 1378993854000,
+      "modified": 1408632978000,
+      "type": "Feature Service",
+      "title": "Brewers_of_Ohio"
+    }, {
+      "id": "d710e7f6304e4bfabdd325acaea67687",
+      "owner": "Paul2573",
+      "created": 1317183218000,
+      "modified": 1340642545000,
+      "type": "Web Map",
+      "title": "Great American Beer Festival Exhibitors & Regions"
+    }, {
+      "id": "de56d53d741440158c8a2ab053c6474c",
+      "owner": "EsriMedia",
+      "created": 1391208131000,
+      "modified": 1391226131000,
+      "type": "Feature Service",
+      "title": "Super_Bowl_Beer"
+    }, {
+      "id": "4c1d7d082b53404cafa9183ecc6c4520",
+      "owner": "EsriMedia",
+      "created": 1474903833000,
+      "modified": 1479133217000,
+      "type": "Web Mapping Application",
+      "title": "Tampa Bay Beer Drinking Habits"
+    }, {
+      "id": "9ffb804c63184c73892080f171e40c69",
+      "owner": "complot",
+      "created": 1459695423000,
+      "modified": 1488111152000,
+      "type": "Web Map",
+      "title": "beer_sheva2"
+    }, {
+      "id": "9a2e589d0db441429d23c10b7b26982d",
+      "owner": "dclancy4",
+      "created": 1360687160000,
+      "modified": 1360705495000,
+      "type": "Web Mapping Application",
+      "title": "NJ Breweries & Beer Events"
+    }, {
+      "id": "1dec28199f19404c8c551155736e05e0",
+      "owner": "vladivoj",
+      "created": 1376945919000,
+      "modified": 1377038441000,
+      "type": "Web Map",
+      "title": "My beer map"
+    }, {
+      "id": "7c54f5a614e9441092930b0beca5eef6",
+      "owner": "joethebeekeeper",
+      "created": 1372739018000,
+      "modified": 1405720465000,
+      "type": "Web Map",
+      "title": "Redding Beer Week"
+    }]
+  };
+  ```
+  - **insert** `searchItems.mockResolvedValueOnce(searchResponse);` at _the top_ of the test
+- the tests should re-run and pass once you save the files
 - stop tests (`ctrl+C`)
+
+Now our smoke test should run quickly and reliably. We're no longer testing `@esri/arcgis-rest-portal` nor any of it's dependencies, but that's a good thing.
 
 ## Next steps
 
