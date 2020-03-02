@@ -285,6 +285,59 @@ Now when you're signed in and you perform a search, if you inspect the network r
 
 The most visual way to test this is to search for a private item. When you are not signed in, it won't show up in the results, then when you sign in it should appear in the list without you having to re-submit the search form.
 
+## Tests
+
+Since jest doesn't run tests in an actual browser, we'll need to mock the code that sets and reads cookies. Also, since `restoreSession()` is called in `index.js`, we can't rely on rendering tests to cover that code. Let's add some unit tests for that function.
+
+- stop app (`ctrl+C`)
+- run the tests w/ `npm test`
+- create a new `src/util/session.js` file w/ the following contents:
+```js
+import { UserSession } from '@esri/arcgis-rest-auth';
+import * as Cookies from 'js-cookie';
+import { restoreSession } from './session';
+
+jest.mock('js-cookie');
+jest.mock('@esri/arcgis-rest-auth');
+
+describe('util', function() {
+  describe('session', function() {
+    describe('restoreSession', function() {
+      beforeEach(function() {
+        Cookies.get.mockClear();
+      });
+      describe('when no cookie', function() {
+        it('reads the cookie but does not deserialize', function() {
+          Cookies.get.mockReturnValueOnce(undefined);
+          restoreSession();
+          expect(Cookies.get.mock.calls.length).toBe(1);
+          expect(Cookies.get.mock.calls[0][0]).toBe('eaa_session');
+          expect(UserSession.deserialize.mock.calls.length).toBe(0);
+        });
+      });
+      describe('when cookie exists', function() {
+        it('reads the cookie and deserializes it', function() {
+          Cookies.get.mockReturnValueOnce('notarealsession');
+          restoreSession();
+          expect(Cookies.get.mock.calls.length).toBe(1);
+          expect(Cookies.get.mock.calls[0][0]).toBe('eaa_session');
+          expect(UserSession.deserialize.mock.calls.length).toBe(1);
+          expect(UserSession.deserialize.mock.calls[0][0]).toBe(
+            'notarealsession'
+          );
+        });
+      });
+    });
+  });
+});
+```
+- the tests should re-run and pass once you save the files
+- stop tests (`ctrl+C`)
+
+Unit tests are good for covering different scenarios. In this case we tested both the case when a cookie already exists and when it doesn't.
+
+From here we would probably want to expand our smoke test to exercise the user menu and/or add unit tests for the `signIn()` and `signOut()` functions [like these](https://github.com/tomwayson/create-arcgis-app/blob/ambitious-arcgis-app-2018/src/utils/session.test.js#L36-L57).
+
 ## Next steps
 
 In [Workshop 6: Maps](./6-maps.md) we'll use the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) to show the search results on a map.
