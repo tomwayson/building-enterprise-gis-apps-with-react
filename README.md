@@ -22,7 +22,7 @@ This repository contains the source code and resources from the **Building Enter
   - slides (TODO: get routing concepts from http://mjuniper.github.io/presentations/ds2019/ambitious-apps-building.html for Ember -> React, and talk about React equivalents to services from http://mjuniper.github.io/presentations/ds2019/ambitious-apps-architecture.html)
   - [workshop](./workshop/3-routing.md)
 - Data
-  - slides (TODO: cobble together something from the above presos about arcgis-rest-js, also cover fetching data in components with the `useEffect()` hook)
+  - slides: http://mjuniper.github.io/presentations/ds2020/enterprise-arcgis-react-4.html
   - [workshop](./workshop/4-data.md)
 - Authentication
   - slides (TODO: @dbouwman)
